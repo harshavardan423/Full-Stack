@@ -1,0 +1,50 @@
+<html>
+<head>
+<style>
+.upload-form {
+  width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.upload-form input[type="text"],
+.upload-form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.upload-form input[type="file"] {
+  margin-bottom: 15px;
+}
+
+.upload-form input[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.upload-form input[type="submit"]:hover {
+  background-color: #222;
+}
+</style>
+</head>
+<body>
+
+<div class="upload-form">
+  <form>
+    <h2>Upload Post</h2>
+    <input type="text" placeholder="Post Title" />
+    <textarea placeholder="Post Content"></textarea>
+    <input type="file" />
+    <input type="submit" value="Publish" />
+  </form>
+</div>
+
+</body>
+</html>
