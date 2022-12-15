@@ -1,0 +1,36 @@
+
+		{% block content %}
+        {% for post in posts %}
+            <article class="media content-section">
+                <div class="media-body">
+                  <div class="article-title">
+                    <a class="song-username" href="#"> {{post.author.username}} <br></a>
+                    <a class="song-title" href="#">  {{post.title}} <br></a>
+                    
+                    <small class="song-date" >  {{post.date_posted.strftime('%Y-%m-%d')}} <br></small>
+                  </div>
+                  <p class="article-title">{{post.description}}</p>
+                </div>
+            </article>
+        {% endfor %}
+    {% endblock content%}
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

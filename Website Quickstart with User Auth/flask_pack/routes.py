@@ -1,19 +1,9 @@
 
-import time
-import json
 from flask import Flask, request, render_template, url_for, flash, redirect,current_app, request,jsonify,send_file,send_from_directory,Response
-from flask_pack.forms import RegistrationForm, LoginForm,PostForm, TransactionForm, SongForm, SeedingForm,SeedingSongForm
-import sys
+from flask_pack.forms import RegistrationForm, LoginForm,PostForm
 from flask_login import login_user, current_user,logout_user, login_required
 from random import randint
 from flask_caching import Cache
-import pyaudio
-import wave
-
-
-
-
-
 
 
 from flask_pack import app,db,bcrypt
@@ -32,13 +22,7 @@ with app.app_context():
     cache = Cache()
     cache.init_app(app) 
     
-
-    
-    
-    
-
  
-
     @app.route('/')
     def index () :
         
@@ -50,7 +34,7 @@ with app.app_context():
 
         
     
-    ## REGISTER ACCOUNT
+    ## USER AUTH STUFF
     @app.route("/register",methods=['GET','POST'])
     def register():
         if current_user.is_authenticated:
@@ -68,13 +52,6 @@ with app.app_context():
             return redirect(url_for('login'))
 
         return render_template('register_page.html', form = form)
-
-
-    
-
-            
-
-        
 
     @app.route("/login",methods=['GET','POST'])         
     def login():
@@ -106,3 +83,29 @@ with app.app_context():
 
         return render_template('account.html', tittle = 'Account')
 
+
+
+    ## CREATE POST
+    @app.route('/post/new',methods=['GET','POST'])
+    @login_required
+    def new_post():
+                form = PostForm()
+                if form.validate_on_submit():
+                    post = Post(title=form.title.data,content=form.content.data, author = current_user)
+                    db.session.add(post)
+                    db.session.commit()
+                    flash('Post Created!','success')
+                    return redirect(url_for('posts'))
+                return render_template('new_post_page.html',title="New Post",form=form)
+
+    @app.route('/posts',methods=['GET','POST'])
+    @login_required
+    def posts():
+        songs = Post.query.order_by(Post.date_posted)
+        
+        if request.method == 'POST' :
+
+            return
+            
+        else :
+            return render_template('posts.html',posts=songs)

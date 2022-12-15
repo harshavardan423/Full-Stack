@@ -32,14 +32,57 @@
 </head>
 <body>
 
-<div class="login-form">
-  <form>
-    <h2>Register</h2>
-    <input type="text" placeholder="Username" />
-    <input type="password" placeholder="Password" />
-    <input type="submit" value="Sign In" />
-  </form>
-</div>
+  {% block content %}
+  <div class="media-body">
+      <form method="POST" action="">
+          {{ form.hidden_tag() }} 
+          <fieldset class="form-group">
+              <legend >Join The Community</legend>
+              <div class = "form-group">
+                  {{form.username.label(class="form-control-label")}}
+  
+                  {% if form.username.errors %}
+                  {{form.username(class="form-control form-controol-lg is-invalid")}}
+                  
+                  <div class="invalid-feedback">
+                      {% for error in form.username.errors %}
+                          <span>{{error}}</span>
+                      {% endfor %}
+                  </div>
+                  {% else %}
+                      {{form.username(class="form-control form-controol-lg")}}
+                  {% endif %}
+  
+                  
+              </div>
+              <div class = "form-group">
+                  {{form.password.label(class="form-control-label")}}
+                  {{form.password(class="form-control form-controol-lg")}}
+              </div>
+              <div class = "form-group">
+                  {{form.password_confirm.label(class="form-control-label")}}
+                  {{form.password_confirm(class="form-control form-controol-lg")}}
+              </div>
+              <div class = "form-group">
+                  {{form.email.label(class="form-control-label")}}
+                  {{form.email(class="form-control form-controol-lg")}}
+              </div>
+              
+          </fieldset>
+          <div class = "form-group">
+              {{form.submit(class='button-39')}}
+          </div>
+      </form>
+  </div>
+  <div >
+      <small class = "text-muted">
+          Already Registered? 
+          <a class="ml-2" href="{{url_for('login')}}"> 
+          Log in
+      </small>
+  
+  </div>
+  {% endblock content%}
 
 </body>
 </html>

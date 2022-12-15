@@ -32,14 +32,38 @@
 </head>
 <body>
 
-<div class="login-form">
-  <form>
-    <h2>Login</h2>
-    <input type="text" placeholder="Username" />
-    <input type="password" placeholder="Password" />
-    <input type="submit" value="Sign In" />
-  </form>
-</div>
+  {% block content %}
+  <div class="media-body">
+      <form method="POST" action="">
+          {{ form.hidden_tag() }} 
+          <fieldset class="form-group">
+              <legend >Log in</legend>
+              <div class = "form-group">
+                  {{form.email.label(class="form-control-label")}}
+                  {{form.email(class="form-control form-controol-lg")}}
+              </div>
+              <div class = "form-group">
+                  {{form.password.label(class="form-control-label")}}
+                  {{form.password(class="form-control form-controol-lg")}}
+              </div>
+              <div class="form-check">
+                  {{form.remember(class="form-check-input")}}
+                  {{form.remember.label(class="form-check-label")}}
+              </div>
+          </fieldset>
+          <div class = "form-group">
+              {{form.submit(class='button-39')}}
+          </div>
+      </form>
+      <div>
+          <small class = "text-muted">
+              Don't have an account? 
+              <a class="ml-2" href="{{url_for('register')}}"> 
+              Register
+          </small>
+      
+      </div>
+  {% endblock content%}
 
 </body>
 </html>
